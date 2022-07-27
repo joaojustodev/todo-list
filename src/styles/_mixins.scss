@@ -1,0 +1,31 @@
+@import "./variants";
+
+@mixin bp1() {
+  @media screen and (min-width: #{$bp1}) {
+    @content;
+  }
+}
+
+@mixin bp2() {
+  @media screen and (min-width: #{$bp2}) {
+    @content;
+  }
+}
+
+@mixin bp3() {
+  @media screen and (min-width: #{$bp3}) {
+    @content;
+  }
+}
+
+@mixin customMinBp($value) {
+  @media screen and (min-width: $value) {
+    @content;
+  }
+}
+
+@mixin customMaxBp($value) {
+  @media screen and (max-width: $value) {
+    @content;
+  }
+}
