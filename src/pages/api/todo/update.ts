@@ -1,4 +1,3 @@
-import { TodoRepositorie } from "./../../../repositories/todoRepositorie";
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/prisma";
 
