@@ -15,6 +15,6 @@ model Todo {
   id String @id @default(uuid())
   slug String
   name String
-  isDone Boolean
-  createdAt DateTime @default(now())
+  isDone Boolean @default(false)
+   createdAt DateTime @default(now())
 }
