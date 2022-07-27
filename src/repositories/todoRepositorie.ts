@@ -1,3 +1,7 @@
 export interface TodoRepositorie {
-  name: String;
+  id: string;
+  name: string;
+  slug: string;
+  isDone: boolean;
+  createdAt: Date;
 }
