@@ -9,6 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.0",
+    "@radix-ui/react-popover": "^1.0.0",
+    "@tanstack/react-query": "^4.0.10",
+    "axios": "^0.27.2",
     "next": "12.2.3",
     "phosphor-react": "^1.4.1",
     "react": "18.2.0",
