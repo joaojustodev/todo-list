@@ -3,11 +3,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../../../lib/api";
 import styles from "./addtodo.module.scss";
 import { CircleNotch, Plus } from "phosphor-react";
-import { useMutateTodo } from "../../../hooks/useMutateTodo";
+import { useAddTodo } from "../../../hooks/useAddTodo";
 
 const AddTodo = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { mutate, isLoading } = useMutateTodo();
+  const { mutate, isLoading } = useAddTodo();
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
