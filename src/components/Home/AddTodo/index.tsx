@@ -1,15 +1,27 @@
 import { FormEvent, useRef } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { api } from "../../../lib/api";
 import styles from "./addtodo.module.scss";
+import { CircleNotch, Plus } from "phosphor-react";
+import { useMutateTodo } from "../../../hooks/useMutateTodo";
 
 const AddTodo = () => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { mutate, isLoading } = useMutateTodo();
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const todo = inputRef.current?.value;
+    const element = inputRef.current;
 
-    console.log(todo);
+    const todo = element?.value as string;
+
+    if (!todo) {
+      // NOTE: DISPARA ERROR PARA USUÁRIO DIGITAR ALGUMA TODO
+      return;
+    }
+
+    mutate({ name: todo });
   }
 
   return (
@@ -27,8 +39,13 @@ const AddTodo = () => {
               className={styles.addtodoButton}
               type="submit"
               title="Add todo"
+              disabled={isLoading}
             >
-              +
+              {isLoading ? (
+                <CircleNotch aria-hidden size={18} />
+              ) : (
+                <Plus aria-hidden size={18} />
+              )}
             </button>
           </div>
         </form>
