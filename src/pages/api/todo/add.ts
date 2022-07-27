@@ -15,7 +15,7 @@ async function addTodosHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const slug = todo.name.replace(" ", "-");
+  const slug = todo.name.replaceAll(" ", "-");
 
   const data = {
     name: todo.name,
@@ -23,8 +23,6 @@ async function addTodosHandler(req: NextApiRequest, res: NextApiResponse) {
   };
 
   const add = await prisma.todo.create({ data });
-
-  console.log(add);
 
   res.status(201).json(add);
 }
