@@ -92,3 +92,42 @@
     }
   }
 }
+
+.todolistTrashPopoverContent {
+  width: 260px;
+  padding: $space-sm;
+  background: #fff;
+
+  border-radius: 8px;
+}
+
+.todolistTrashPopoverContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+
+  & > button {
+    width: 40%;
+    height: 26px;
+    background: rgba(0, 0, 0, 0.09);
+    transition: background 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    border-radius: 4px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.todolistTrashPopoverContentCheckBox {
+  & > input {
+    cursor: pointer;
+  }
+
+  & > span {
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
