@@ -29,7 +29,7 @@
 - [React](https://reactjs.org/)
 - [NextJS](https://nextjs.org/)
 - [SASS](https://sass-lang.com/)
-- [ReactQuery](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/
+- [ReactQuery](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/)
 - [Prisma](https://www.prisma.io/)
 
 ## 🙋‍♂️ Author
