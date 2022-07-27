@@ -60,7 +60,7 @@
   transition: background 0.1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-.done {
+.todolistCheckWrapperDone {
   background: green;
 
   & span svg {

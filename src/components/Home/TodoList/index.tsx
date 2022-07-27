@@ -29,7 +29,7 @@ const TodoList = () => {
                 <div style={{ display: "flex" }}>
                   <div
                     className={`${styles.todolistCheckWrapper} ${
-                      todo.done ? styles.done : ""
+                      todo.done ? styles.todolistCheckWrapperDone : ""
                     }`}
                   >
                     <span>
