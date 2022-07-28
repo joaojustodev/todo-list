@@ -1,0 +1,39 @@
+@import "../../../../styles/core/variants";
+@import "../../../../styles/core/mixins";
+
+.todolistSkeletonWrapper {
+  width: 100%;
+  max-width: 640px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: map-get($map: $indigo, $key: 500);
+  border-radius: 8px;
+  box-shadow: $shadow-lg;
+
+  @include bp1() {
+    padding: $space-sm;
+  }
+}
+
+.todolistSkeleton {
+  width: 100%;
+
+  @include bp1() {
+    width: 640px;
+  }
+}
+
+.todolistItemSkeleton {
+  width: 100%;
+  height: 72px;
+  color: $white;
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  transition: background 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+
+  @include shimmer(1s);
+}

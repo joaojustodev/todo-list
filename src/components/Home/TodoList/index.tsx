@@ -6,6 +6,7 @@ import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import styles from "./todolist.module.scss";
 import { Check, Trash } from "phosphor-react";
+import TodoListSkeleton from "../../Ui/Skeletons/TodoListSkeleton";
 
 const TodoList = () => {
   const { data, isLoading } = useTodos();
@@ -24,9 +25,6 @@ const TodoList = () => {
     useState<boolean>(false);
 
   //NOTE: LOADING DOS TODOS
-  if (!data || isLoading) {
-    return <div>loading...</div>;
-  }
 
   // NOTE:FUNÇÃO QUE VERIFICA QUANDO POPOVER DA LIXEIRA FOR FECHAR E SE O CHECKBOX DO POPOVER PARA ESCONDE-LO ESTÁ FECHADO
   function hideTrashMessage(e: boolean) {
@@ -39,6 +37,10 @@ const TodoList = () => {
 
   function handleUpdateTodo(id: string) {
     updateTodo({ id });
+  }
+
+  if (!data || isLoading) {
+    return <TodoListSkeleton />;
   }
 
   {

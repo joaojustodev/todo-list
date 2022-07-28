@@ -35,23 +35,6 @@
   font-weight: $wheight;
 }
 
-@mixin rotate($duration) {
-  animation-name: rotate;
-  animation-duration: $duration;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-
-  @keyframes rotate {
-    from {
-      transform: rotate(0deg);
-    }
-
-    to {
-      transform: rotate(720deg);
-    }
-  }
-}
-
 @mixin scratch() {
   content: "";
   position: absolute;
@@ -82,6 +65,48 @@
 
     100% {
       width: 0%;
+    }
+  }
+}
+
+@mixin rotate($duration) {
+  animation-name: rotate;
+  animation-duration: $duration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(720deg);
+    }
+  }
+}
+
+@mixin shimmer($duration) {
+  animation-name: shimmer;
+  animation-duration: $duration;
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  animation-iteration-count: infinite;
+  background: lighten($color: map-get($map: $indigo, $key: 900), $amount: 30);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    map-get($map: $indigo, $key: 500),
+    transparent
+  );
+  background-repeat: no-repeat;
+
+  @keyframes shimmer {
+    from {
+      background-position: -465px;
+    }
+
+    to {
+      background-position: 465px;
     }
   }
 }
