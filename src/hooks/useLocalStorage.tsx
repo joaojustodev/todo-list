@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { isBrowser } from "../utils/isBrowser";
+import isBrowser from "../utils/isBrowser";
 
 // Hook
 function useLocalStorage<T>(key: string, initialValue: T) {

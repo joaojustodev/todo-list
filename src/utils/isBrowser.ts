@@ -4,10 +4,6 @@
  * @returns Boolean
  */
 
-export function isBrowser(): Boolean {
-  if (typeof window !== undefined) {
-    return true;
-  }
-
-  return false;
-}
+export default typeof window !== "undefined" &&
+  typeof document !== "undefined" &&
+  typeof navigator !== "undefined";
