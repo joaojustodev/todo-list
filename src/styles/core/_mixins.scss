@@ -29,3 +29,25 @@
     @content;
   }
 }
+
+@mixin uchan($wheight) {
+  font-family: "Uchan", sans-serif;
+  font-weight: $wheight;
+}
+
+@mixin rotate($duration) {
+  animation-name: rotate;
+  animation-duration: $duration;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(720deg);
+    }
+  }
+}
