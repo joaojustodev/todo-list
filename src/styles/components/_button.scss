@@ -1,0 +1,21 @@
+%button {
+  color: $white;
+  background: map-get($indigo, 500);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 6px;
+
+  transition: background 0.4s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  &:disabled {
+    cursor: not-allowed;
+    background: map-get($indigo, 800);
+  }
+
+  &:hover {
+    background: lighten(map-get($indigo, 700), $amount: 5);
+  }
+}
