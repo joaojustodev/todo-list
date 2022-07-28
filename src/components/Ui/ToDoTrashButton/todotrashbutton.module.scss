@@ -1,0 +1,67 @@
+@import "../../../styles/core/variants";
+@import "../../../styles/core/mixins";
+@import "../../../styles/components/index.scss";
+
+.trashButton {
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  transition: background 0.1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+  & > svg {
+    color: $white;
+  }
+
+  &:hover {
+    background: map-get($map: $indigo, $key: 500);
+  }
+}
+
+.trashButtonPopoverContentWrapper {
+  width: 260px;
+  padding: $space-sm;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: $shadow;
+  right: 10px;
+
+  @include bp1 {
+    width: 280px;
+  }
+}
+
+.trashButtonPopoverContent {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+  margin-bottom: $space-sm;
+
+  & > strong {
+    font-size: 16px;
+  }
+
+  & > button {
+    width: 40%;
+    height: 26px;
+    @extend %button;
+  }
+}
+
+.trashButtonPopoverArrow {
+  fill: white;
+}
+
+.trashButtonPopoverCheckBox {
+  & > label,
+  input {
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
