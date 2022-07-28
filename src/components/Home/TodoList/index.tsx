@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { useTodos } from "../../../hooks/useTodos";
 import { useUpdateTodo } from "../../../hooks/useUpdateTodo";
@@ -11,6 +11,7 @@ const TodoList = () => {
   const { data, isLoading } = useTodos();
   const { mutate: updateTodo } = useUpdateTodo();
   const { mutate: deteleTodo } = useDeleteTodo();
+  const todoNameRef = useRef<HTMLSpanElement>(null);
 
   // NOTE: VERIFICA SE O POPOVER JA FOI MARCADO COMO TRUE, ASSIM ELE NAO APARECE MAIS A MENSAGEM DE SEGURANÇA
   const [hideTrashMessageStorage, setHideTrashMessageStorage] = useLocalStorage(
@@ -36,6 +37,10 @@ const TodoList = () => {
     }
   }
 
+  function handleUpdateTodo(id: string) {
+    updateTodo({ id });
+  }
+
   {
     /** NOTE: MELHORAR ACESSIBILIDADE AQUI */
   }
@@ -49,11 +54,10 @@ const TodoList = () => {
                 key={todo.id}
                 tabIndex={1}
                 className={styles.todolistListItem}
-                onKeyUp={(e) => console.log(e)}
               >
                 <div
                   style={{ display: "flex", width: "100%" }}
-                  onClick={() => updateTodo({ id: todo.id })}
+                  onClick={() => handleUpdateTodo(todo.id)}
                 >
                   <span
                     className={`${styles.todolistCheckWrapper} ${
@@ -63,10 +67,9 @@ const TodoList = () => {
                     {todo.isDone ? <Check size={16} /> : ""}
                   </span>
                   <span
+                    ref={todoNameRef}
                     className={`${styles.todolistListItemName} ${
-                      todo.isDone
-                        ? styles.todolistListItemNameDone
-                        : styles.todolistListItemNameNotDone
+                      todo.isDone ? styles.todolistListItemNameDone : ""
                     }`}
                   >
                     {todo.name}
