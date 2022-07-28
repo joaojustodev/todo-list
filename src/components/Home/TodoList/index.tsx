@@ -49,10 +49,12 @@ const TodoList = () => {
                 key={todo.id}
                 tabIndex={1}
                 className={styles.todolistListItem}
-                onClick={() => updateTodo({ id: todo.id })}
                 onKeyUp={(e) => console.log(e)}
               >
-                <div style={{ display: "flex" }}>
+                <div
+                  style={{ display: "flex", width: "100%" }}
+                  onClick={() => updateTodo({ id: todo.id })}
+                >
                   <span
                     className={`${styles.todolistCheckWrapper} ${
                       todo.isDone ? styles.todolistCheckDoneWrapper : ""
@@ -60,7 +62,15 @@ const TodoList = () => {
                   >
                     {todo.isDone ? <Check size={16} /> : ""}
                   </span>
-                  <span>{todo.name}</span>
+                  <span
+                    className={`${styles.todolistListItemName} ${
+                      todo.isDone
+                        ? styles.todolistListItemNameDone
+                        : styles.todolistListItemNameNotDone
+                    }`}
+                  >
+                    {todo.name}
+                  </span>
                 </div>
 
                 {hideTrashMessageStorage ? (
@@ -88,7 +98,10 @@ const TodoList = () => {
                         aria-describedby="Remove todo"
                         className={styles.todolistTrashPopoverContentWrapper}
                       >
-                        <Popover.Arrow aria-hidden />
+                        <Popover.Arrow
+                          aria-hidden
+                          className={styles.todoListTrashPopoverArrow}
+                        />
                         <div className={styles.todolistTrashPopoverContent}>
                           <strong>
                             Tem certeza que deseja excluir esse todo ?

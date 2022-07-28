@@ -12,6 +12,7 @@
 
   background: map-get($map: $indigo, $key: 500);
   border-radius: 8px;
+  box-shadow: $shadow-lg;
 
   @include bp1() {
     padding: $space-sm;
@@ -48,6 +49,24 @@
   &:hover {
     background: lighten($color: map-get($map: $indigo, $key: 700), $amount: 5);
   }
+}
+
+.todolistListItemName {
+  position: relative;
+}
+
+.todolistListItemNameDone::before {
+  @include scratch;
+  top: 10px;
+  left: 0;
+  @include scratchIn(0.4s);
+}
+
+.todolistListItemNameNotDone::before {
+  @include scratch;
+  top: 10px;
+  left: 0;
+  @include scratchOut(0.4s);
 }
 
 .todolistCheckWrapper {
@@ -122,6 +141,10 @@
     height: 26px;
     @extend %button;
   }
+}
+
+.todoListTrashPopoverArrow {
+  fill: white;
 }
 
 .todolistTrashPopoverContentCheckBox {

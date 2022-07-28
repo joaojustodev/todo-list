@@ -51,3 +51,37 @@
     }
   }
 }
+
+@mixin scratch() {
+  content: "";
+  position: absolute;
+  height: 2px;
+  background: map-get($map: $indigo, $key: 900);
+  @content;
+}
+
+@mixin scratchIn($duration) {
+  animation: scratchIn $duration cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  @keyframes scratchIn {
+    0% {
+      width: 0%;
+    }
+
+    100% {
+      width: 100%;
+    }
+  }
+}
+
+@mixin scratchOut($duration) {
+  animation: scratchOut $duration cubic-bezier(0.075, 0.82, 0.165, 1) forwards;
+  @keyframes scratchOut {
+    0% {
+      width: 100%;
+    }
+
+    100% {
+      width: 0%;
+    }
+  }
+}
