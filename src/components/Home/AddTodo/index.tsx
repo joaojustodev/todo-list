@@ -42,9 +42,14 @@ const AddTodo = () => {
               disabled={isLoading}
             >
               {isLoading ? (
-                <CircleNotch aria-hidden size={18} />
+                <CircleNotch
+                  aria-hidden
+                  color="#fff"
+                  size={18}
+                  className={styles.headerCircleLoading}
+                />
               ) : (
-                <Plus aria-hidden size={18} />
+                <Plus aria-hidden size={18} color="#fff" />
               )}
             </button>
           </div>

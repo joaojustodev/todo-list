@@ -1,8 +1,55 @@
-@import "../../styles/variants";
-@import "../../styles/mixins";
+@import "../../styles/core/variants";
+@import "../../styles/core/mixins";
 
 .header {
   width: 100%;
   height: 56px;
-  background-color: $white;
+  background-color: map-get($indigo, 500);
+}
+
+.headerNav {
+  height: 100%;
+  padding: $space-sm;
+}
+
+.headerTitleWrapper {
+  position: relative;
+}
+
+.headerTitle {
+  color: $white;
+  font-size: 28px;
+  @include uchan(300);
+
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  position: relative;
+  z-index: 10;
+}
+
+.headerTitleRedBlock {
+  width: 12px;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  z-index: 1;
+
+  background: map-get($indigo, 900);
+  transform: rotate(24deg);
+}
+
+.headerTitleGreenBlock {
+  width: 12px;
+  height: 100%;
+
+  position: absolute;
+  top: -5px;
+  left: 10px;
+  z-index: 2;
+
+  background: map-get($indigo, 800);
+  transform: rotate(24deg);
 }

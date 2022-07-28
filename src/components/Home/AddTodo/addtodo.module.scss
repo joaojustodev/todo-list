@@ -1,5 +1,6 @@
-@import "../../../styles/variants";
-@import "../../../styles/mixins";
+@import "../../../styles/core/variants";
+@import "../../../styles/core/mixins";
+@import "../../../styles/components/index";
 
 .addTodoBlock {
   margin-bottom: $space-lg;
@@ -36,21 +37,16 @@
 .addtodoButton {
   width: 36px;
   height: 36px;
-
-  background: rgba(0, 0, 0, 0.4);
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+  border-radius: 0px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
-
-  &:disable {
-    background: rgba(0, 0, 0, 0.1);
-  }
+  @extend %button;
 
   & svg {
-    color: rgb(0, 0, 0);
+    color: $white;
   }
+}
+
+.headerCircleLoading {
+  @include rotate(1s);
 }

@@ -1,11 +1,11 @@
+import { useState } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import { useTodos } from "../../../hooks/useTodos";
 import { useUpdateTodo } from "../../../hooks/useUpdateTodo";
 import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
+import useLocalStorage from "../../../hooks/useLocalStorage";
 import styles from "./todolist.module.scss";
 import { Check, Trash } from "phosphor-react";
-import useLocalStorage from "../../../hooks/useLocalStorage";
-import { useState } from "react";
 
 const TodoList = () => {
   const { data, isLoading } = useTodos();
@@ -36,36 +36,40 @@ const TodoList = () => {
     }
   }
 
+  {
+    /** NOTE: MELHORAR ACESSIBILIDADE AQUI */
+  }
   return (
     <div>
-      <div className="containerLg">
+      <div className="containerLg flexCenter">
         <div className={styles.todolistWrapper}>
           <ul className={styles.todolistList}>
             {data.map((todo) => (
-              <li key={todo.id} className={styles.todolistListItem}>
-                <div
-                  style={{ display: "flex" }}
-                  className="full"
-                  onClick={() => updateTodo({ id: todo.id })}
-                >
-                  <div
+              <li
+                key={todo.id}
+                tabIndex={1}
+                className={styles.todolistListItem}
+                onClick={() => updateTodo({ id: todo.id })}
+                onKeyUp={(e) => console.log(e)}
+              >
+                <div style={{ display: "flex" }}>
+                  <span
                     className={`${styles.todolistCheckWrapper} ${
-                      todo.isDone ? styles.todolistCheckWrapperDone : ""
+                      todo.isDone ? styles.todolistCheckDoneWrapper : ""
                     }`}
                   >
-                    <span>
-                      {todo.isDone ? <Check aria-hidden size={16} /> : ""}
-                    </span>
-                  </div>
+                    {todo.isDone ? <Check size={16} /> : ""}
+                  </span>
                   <span>{todo.name}</span>
                 </div>
-                {/** NOTE: MELHORAR ACESSIBILIDADE AQUI */}
+
                 {hideTrashMessageStorage ? (
                   <button
-                    className={styles.todolistTrashWrapper}
+                    className={styles.todolistTrashButton}
                     type="button"
                     title="Remove todo"
                     onClick={() => deteleTodo({ id: todo.id })}
+                    tabIndex={2}
                   >
                     <Trash aria-hidden size={18} />
                   </button>
@@ -74,25 +78,27 @@ const TodoList = () => {
                     <Popover.Trigger
                       title=""
                       aria-labelledby="Click here for remove todo"
-                      className={styles.todolistTrashWrapper}
+                      className={styles.todolistTrashButton}
+                      tabIndex={2}
                     >
-                      <Trash aria-hidden size={18} />
+                      <Trash aria-hidden size={22} />
                     </Popover.Trigger>{" "}
                     <Popover.Portal>
                       <Popover.Content
                         aria-describedby="Remove todo"
-                        className={styles.todolistTrashPopoverContent}
+                        className={styles.todolistTrashPopoverContentWrapper}
                       >
                         <Popover.Arrow aria-hidden />
-                        <div
-                          className={styles.todolistTrashPopoverContentWrapper}
-                        >
-                          <span>
+                        <div className={styles.todolistTrashPopoverContent}>
+                          <strong>
                             Tem certeza que deseja excluir esse todo ?
-                          </span>
+                          </strong>
                           <Popover.Close
                             type="button"
                             title="Remove todo"
+                            aria-label="Remove todo"
+                            className="button"
+                            tabIndex={1}
                             onClick={() => deteleTodo({ id: todo.id })}
                           >
                             Excluir
@@ -101,14 +107,19 @@ const TodoList = () => {
                         <div
                           className={styles.todolistTrashPopoverContentCheckBox}
                         >
-                          <input
-                            type="checkbox"
-                            checked={hideTrashMessageCheckBox}
-                            onChange={() =>
-                              setHideTrashMessageCheckBox((old) => !old)
-                            }
-                          />{" "}
-                          <span>Não aparecer mais essa mensagem</span>
+                          <label htmlFor="hideTrashMessage">
+                            <input
+                              id="hideTrashMessage"
+                              type="checkbox"
+                              tabIndex={2}
+                              checked={hideTrashMessageCheckBox}
+                              aria-checked={hideTrashMessageCheckBox}
+                              onChange={() =>
+                                setHideTrashMessageCheckBox((old) => !old)
+                              }
+                            />{" "}
+                            Não aparecer mais essa mensagem.
+                          </label>
                         </div>
                       </Popover.Content>
                     </Popover.Portal>
