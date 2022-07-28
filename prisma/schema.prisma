@@ -16,5 +16,5 @@ model Todo {
   slug String
   name String
   isDone Boolean @default(false)
-   createdAt DateTime @default(now())
+  createdAt DateTime @default(now())
 }
