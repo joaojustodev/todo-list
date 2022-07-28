@@ -25,11 +25,11 @@ async function deleteTodosHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  await prisma.todo.delete({
+  const deleted = await prisma.todo.delete({
     where: { id },
   });
 
-  res.status(200);
+  res.status(200).json({ message: "Todo removed", id: deleted.id });
 }
 
 export default deleteTodosHandler;
