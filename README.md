@@ -12,6 +12,8 @@
 
 ## 🎨 Screen
 
+<img alt="Tela principal do site todolist" src="./.github/image.webp" />
+
 <h3 align="center">
 
 </h3>
