@@ -1,0 +1,94 @@
+@import "../../../styles/core/variants";
+@import "../../../styles/core/mixins";
+
+.popUpViewPort {
+  position: fixed;
+  bottom: 20px;
+  right: 0;
+  width: 200px;
+
+  @include bp1() {
+    right: -25px;
+    width: 265px;
+  }
+}
+
+.popUpRoot {
+  background: map-get($map: $indigo, $key: 500);
+  color: $white;
+
+  font-weight: 600;
+
+  padding: $space-sm;
+
+  box-shadow: $shadow-lg;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+
+  @keyframes slideRight {
+    from {
+      transform: translateX(var(--radix-toast-swipe-end-x));
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @keyframes open {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes closed {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &[data-state="open"] {
+      animation: open 200ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    &[data-state="closed"] {
+      animation: closed 200ms ease-in;
+    }
+
+    &[data-swipe="move"] {
+      transform: translateX(var(--radix-toast-swipe-move-x));
+    }
+    &[data-swipe="cancel"] {
+      transform: translateX(0);
+      transition: transform 200ms ease-out;
+    }
+    &[data-swipe="end"] {
+      animation: slideRight 100ms ease-out;
+    }
+  }
+}
+
+.popUpTitle {
+  display: flex;
+  align-items: center;
+  column-gap: $space-sm;
+  margin-bottom: $space-sm;
+}
+
+.popUpRootError {
+  @extend .popUpRoot;
+
+  background: $error;
+}
+
+.popUpRootSuccess {
+  @extend .popUpRoot;
+
+  background: $success;
+}
