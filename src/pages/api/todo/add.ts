@@ -8,8 +8,6 @@ async function addTodosHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  return res.status(400).send("error");
-
   const todo = req.body as TodoRepositorie;
 
   if (!todo.name) {
