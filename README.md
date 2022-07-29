@@ -31,6 +31,17 @@
 - [ReactQuery](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/)
 - [Prisma](https://www.prisma.io/)
 
+## Install
+
+```
+$ git clone https://github.com/joaojustodev/todo-list
+
+$ yarn install
+
+$ yarn dev
+ 
+```
+
 ## 🙋‍♂️ Author
 
 - **João Vitor** - [JoaoJustoDev](https://github.com/joaojustodev)
