@@ -1,0 +1,11 @@
+@import "../PopUp/popup.module.scss";
+
+.popUpSuccessTitle {
+  @extend .popUpTitle;
+}
+
+.popUpSuccess {
+  @extend .popUpContentWrapper;
+
+  background: $success;
+}

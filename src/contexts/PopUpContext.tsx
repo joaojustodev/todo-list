@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 
-interface PopUpRoleDTO {
+export interface PopUpRoleProps {
   type: "error" | "success" | "";
   message?: string;
 }
@@ -15,20 +15,20 @@ interface PopUpRoleDTO {
 interface PopUpContext {
   openPopUp: boolean;
   setOpenPopUp: Dispatch<SetStateAction<boolean>>;
-  rolePopUp: PopUpRoleDTO;
-  handleOpenPopUp: (role: PopUpRoleDTO) => void;
+  rolePopUp: PopUpRoleProps;
+  handleOpenPopUp: (role: PopUpRoleProps) => void;
 }
 
 export const PopUpContext = createContext({} as PopUpContext);
 
 export const PopUpContextProvider: FC<PropsWithChildren> = ({ children }) => {
   const [openPopUp, setOpenPopUp] = useState(false);
-  const [rolePopUp, setRolePopUp] = useState<PopUpRoleDTO>({
+  const [rolePopUp, setRolePopUp] = useState<PopUpRoleProps>({
     type: "",
     message: "",
   });
 
-  function handleOpenPopUp(role: PopUpRoleDTO) {
+  function handleOpenPopUp(role: PopUpRoleProps) {
     setOpenPopUp(true);
     setRolePopUp(role);
   }

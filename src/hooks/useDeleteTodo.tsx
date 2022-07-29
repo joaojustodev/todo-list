@@ -1,4 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useContext } from "react";
+import { PopUpContext } from "../contexts/PopUpContext";
 import { api } from "../lib/api";
 import { TodoRepositorie } from "../repositories/todoRepositorie";
 
@@ -9,6 +11,7 @@ interface useDeleteResponse {
 
 export const useDeleteTodo = () => {
   const queryClient = useQueryClient();
+  const { handleOpenPopUp } = useContext(PopUpContext);
 
   return useMutation(
     async (todo: { id: string }) => {
@@ -30,6 +33,11 @@ export const useDeleteTodo = () => {
 
         await queryClient.setQueryData(["todos"], newTodos);
       },
+      onError: () =>
+        handleOpenPopUp({
+          type: "error",
+          message: "Não foi possível deletar o todo!",
+        }),
       retry: false,
     }
   );

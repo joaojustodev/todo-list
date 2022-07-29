@@ -8,22 +8,12 @@
   width: 200px;
 
   @include bp1() {
-    right: -25px;
-    width: 265px;
+    width: 280px;
   }
 }
 
 .popUpRoot {
-  background: map-get($map: $indigo, $key: 500);
-  color: $white;
-
-  font-weight: 600;
-
-  padding: $space-sm;
-
   box-shadow: $shadow-lg;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
 
   @keyframes slideRight {
     from {
@@ -74,6 +64,17 @@
   }
 }
 
+.popUpContentWrapper {
+  background: map-get($map: $indigo, $key: 500);
+  color: $white;
+
+  font-weight: 600;
+  padding: $space-sm;
+
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
 .popUpTitle {
   display: flex;
   align-items: center;
@@ -81,14 +82,8 @@
   margin-bottom: $space-sm;
 }
 
-.popUpRootError {
-  @extend .popUpRoot;
-
-  background: $error;
-}
-
-.popUpRootSuccess {
-  @extend .popUpRoot;
+.popUpContentSuccess {
+  @extend .popUpContentWrapper;
 
   background: $success;
 }

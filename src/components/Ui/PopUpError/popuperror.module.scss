@@ -1,0 +1,11 @@
+@import "../PopUp/popup.module.scss";
+
+.popUpErrorTitle {
+  @extend .popUpTitle;
+}
+
+.popUpError {
+  @extend .popUpContentWrapper;
+
+  background: $error;
+}
