@@ -1,11 +1,12 @@
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useAddTodo } from "../../../hooks/useAddTodo";
 import { CircleNotch, Plus } from "phosphor-react";
 import styles from "./addtodo.module.scss";
 
 const AddTodo = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { mutate, isLoading, isError } = useAddTodo();
+  const { mutate, isLoading } = useAddTodo();
+  const [error, setError] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -15,9 +16,10 @@ const AddTodo = () => {
     const todo = element?.value as string;
 
     if (!todo) {
-      // NOTE: DISPARA ERROR PARA USUÁRIO DIGITAR ALGUMA TODO
+      setError(true);
       return;
     }
+    setError(false);
 
     mutate({ name: todo });
   }
@@ -32,7 +34,9 @@ const AddTodo = () => {
           >
             <div className={styles.addInputBlock}>
               <input
-                className={styles.addtodoInput}
+                className={`${styles.addtodoInput} ${
+                  error ? styles.addtodoInputWithError : ""
+                }`}
                 ref={inputRef}
                 type="text"
                 placeholder="Todo name"

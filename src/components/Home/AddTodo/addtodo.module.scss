@@ -32,6 +32,14 @@
   border-bottom-left-radius: 8px;
 
   padding-left: 4px;
+
+  transition: box-shadow 0.4s linear;
+}
+
+.addtodoInputWithError {
+  box-shadow: 1.5px 1.5px 6.66px 2.33px lighten($color: $error, $amount: 10);
+  outline-color: lighten($color: $error, $amount: 10);
+  border: 1px solid lighten($color: $error, $amount: 10);
 }
 
 .addtodoButton {
