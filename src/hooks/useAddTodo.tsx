@@ -22,7 +22,7 @@ export const useAddTodo = () => {
           type: "error",
           message: "Não foi possível criar o todo!",
         }),
-      retry: 0,
+      retry: false,
     }
   );
 };

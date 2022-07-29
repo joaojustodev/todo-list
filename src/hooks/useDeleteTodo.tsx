@@ -30,6 +30,7 @@ export const useDeleteTodo = () => {
 
         await queryClient.setQueryData(["todos"], newTodos);
       },
+      retry: false,
     }
   );
 };

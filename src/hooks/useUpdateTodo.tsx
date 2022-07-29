@@ -13,6 +13,7 @@ export const useUpdateTodo = () => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["todos"]);
       },
+      retry: false,
     }
   );
 };

@@ -14,6 +14,7 @@ export const useTodos = () => {
       onError: (error) => {
         console.log(error);
       },
+      retry: false,
     }
   );
 };
