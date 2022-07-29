@@ -2,12 +2,9 @@
   <strong>TodoList</strong>
 </h1>
 
-<h2 align="center">
-  <strong>🏗️ Projeto em andamento...</strong>
-</h2>
 
 <p align="center">
-🗣👥 Projeto com CRUD do Todos utilizando NextJS + Prisma
+🗣👥 Projeto com CRUD do TODOS utilizando NextJS + Prisma
 </p>
 
 ## 🎨 Screen
