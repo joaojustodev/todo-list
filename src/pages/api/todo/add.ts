@@ -15,6 +15,13 @@ async function addTodosHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
+  const todos = await prisma.todo.count();
+
+  if (todos >= 10) {
+    res.status(406).json({ error: "Maximun todos: 10!" });
+    return;
+  }
+
   const slug = todo.name.replaceAll(" ", "-");
 
   const data = {
