@@ -3,6 +3,7 @@ import { prisma } from "../../../lib/prisma";
 
 interface UpdateTodosHandler {
   id: string;
+  finished: boolean;
 }
 
 async function uptateTodosHandler(req: NextApiRequest, res: NextApiResponse) {
@@ -11,30 +12,21 @@ async function uptateTodosHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const { id } = req.body as UpdateTodosHandler;
+  const { id, finished } = req.body as UpdateTodosHandler;
 
-  if (!id) {
-    res.status(400).json({ error: "ID is required" });
+  if (!id || finished === undefined) {
+    res.status(400).json({ error: "Any argument is undefined" });
     return;
   }
 
-  const todo = await prisma.todo.findUnique({
-    where: { id },
-  });
-
-  if (!todo) {
-    res.status(400).json({ error: "Todo not found" });
-    return;
-  }
-
-  const update = await prisma.todo.update({
+  await prisma.todo.update({
     where: { id },
     data: {
-      isDone: !todo.isDone,
+      isDone: finished,
     },
   });
 
-  res.status(200).json(update);
+  res.status(200).json({ message: "Updated" });
 }
 
 export default uptateTodosHandler;

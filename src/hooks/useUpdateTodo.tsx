@@ -8,7 +8,7 @@ export const useUpdateTodo = () => {
   const { handleOpenPopUp } = useContext(PopUpContext);
 
   return useMutation(
-    async (todo: { id: string }) => {
+    async (todo: { id: string; finished: boolean }) => {
       const { data } = await api.post(`/api/todo/update`, todo);
       return data;
     },
