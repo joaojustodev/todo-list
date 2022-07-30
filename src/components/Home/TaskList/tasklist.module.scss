@@ -25,6 +25,8 @@
   position: relative;
   width: 100%;
   min-height: 52px;
+  display: flex;
+  flex-direction: column;
 
   padding: $space-sm;
 
@@ -42,7 +44,7 @@
     background: lighten($color: map-get($map: $indigo, $key: 700), $amount: 5);
   }
 
-  & > div {
+  & > div:first-child {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -50,15 +52,16 @@
 }
 
 .tasklistListItemExpand {
-  height: 102px;
+  & > div:first-child {
+    margin-bottom: $space-lg;
+  }
 
   & .tasklistExpandButton {
     transform: rotate(180deg);
   }
 
   & .tasklistItemDetails {
-    z-index: 1;
-    @include fadeIn(0.4s, 50ms);
+    display: block;
   }
 }
 
@@ -114,19 +117,15 @@
 }
 
 .tasklistItemDetails {
-  position: absolute;
-  bottom: 10px;
-  right: 0;
-  left: 0;
-  opacity: 0;
-  z-index: -1;
-
+  display: none;
   & > div {
     width: 100%;
     display: flex;
     align-items: center;
     gap: $space-md;
     justify-content: flex-start;
+    opacity: 0;
+    @include fadeIn(0.4s, 50ms);
 
     @include bp1 {
       justify-content: space-between;

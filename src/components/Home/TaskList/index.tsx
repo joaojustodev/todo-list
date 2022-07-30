@@ -5,7 +5,6 @@ import TaskTrashButton from "../../Ui/TaskTrashButton";
 import TaskListSkeleton from "../../Ui/Skeletons/TaskListSkeleton";
 import styles from "./tasklist.module.scss";
 import { CaretDown } from "phosphor-react";
-import { toUnicode } from "punycode";
 
 const TaskList = () => {
   const { data, isLoading, isError } = useTasks();
@@ -72,8 +71,7 @@ const TaskList = () => {
                         display: "grid",
                         gridTemplateColumns: "22px 1fr",
                         gridTemplateRows: "1fr",
-                        gap: "8px",
-
+                        columnGap: "8px",
                         alignItems: "center",
                       }}
                     >
