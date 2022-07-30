@@ -7,7 +7,11 @@ async function listTodosHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const todos = await prisma.todo.findMany();
+  const todos = await prisma.todo.findMany({
+    orderBy: {
+      createdAt: "asc",
+    },
+  });
 
   res.status(200).json(todos);
 }
