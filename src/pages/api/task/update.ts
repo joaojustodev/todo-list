@@ -23,6 +23,7 @@ async function uptateTaskHandler(req: NextApiRequest, res: NextApiResponse) {
     where: { id },
     data: {
       finished,
+      finishedAt: new Date(),
     },
   });
 

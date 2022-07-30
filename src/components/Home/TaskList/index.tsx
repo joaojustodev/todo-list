@@ -5,6 +5,7 @@ import TaskTrashButton from "../../Ui/TaskTrashButton";
 import TaskListSkeleton from "../../Ui/Skeletons/TaskListSkeleton";
 import styles from "./tasklist.module.scss";
 import { CaretDown } from "phosphor-react";
+import { toUnicode } from "punycode";
 
 const TaskList = () => {
   const { data, isLoading, isError } = useTasks();
@@ -111,7 +112,12 @@ const TaskList = () => {
                     </div>
                   </div>
                   <div className={`${styles.tasklistItemDetails}`}>
-                    <span>Created At: {formatDate(task.createdAt)}</span>
+                    <div>
+                      <span>Created At: {formatDate(task.createdAt)}</span>
+                      {task.finished && (
+                        <span>Finished At: {formatDate(task.finishedAt)}</span>
+                      )}
+                    </div>
                   </div>
                 </li>
               ))}

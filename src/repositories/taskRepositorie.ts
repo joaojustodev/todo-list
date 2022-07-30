@@ -3,6 +3,6 @@ export interface TaskRepositorie {
   name: string;
   slug: string;
   finished: boolean;
-  finishedAt?: Date;
+  finishedAt: Date;
   createdAt: Date;
 }
