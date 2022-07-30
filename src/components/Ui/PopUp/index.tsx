@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import * as Toast from "@radix-ui/react-toast";
-import PopUpError from "../PopUpError";
+import PopUpError from "./PopUpError";
+import PopUpSuccess from "./PopUpSuccess";
 
 import styles from "./popup.module.scss";
 import { PopUpRoleProps } from "../../../contexts/PopUpContext";
-import PopUpSuccess from "../PopUpSuccess";
 
 interface PopUpProps extends PopUpRoleProps {
   state: boolean;
