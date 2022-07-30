@@ -1,16 +1,16 @@
 import * as Popover from "@radix-ui/react-popover";
-import { useDeleteTodo } from "../../../hooks/useDeleteTodo";
+import { useDeleteTask } from "../../../hooks/useDeleteTask";
 import useLocalStorage from "../../../hooks/useLocalStorage";
-import styles from "./todotrashbutton.module.scss";
+import styles from "./tasktrashbutton.module.scss";
 import { Trash } from "phosphor-react";
 import { useState } from "react";
 
-interface TodoTrashButtonProps {
+interface TaskTrashButtonProps {
   id: string;
 }
 
-const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
-  const { mutate: deteleTodo } = useDeleteTodo();
+const TaskTrashButton = ({ id }: TaskTrashButtonProps) => {
+  const { mutate: deteleTask } = useDeleteTask();
   const [hideSecurityMessageStorage, setHideSecurityMessage] = useLocalStorage(
     "hide-trash-security-message",
     false
@@ -24,6 +24,7 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
       }
     }
   }
+  //NOTE: VERIFICAR ACESSIBILIDADE AQUI
 
   return (
     <>
@@ -31,8 +32,8 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
         <button
           className={styles.trashButton}
           type="button"
-          title="Remove todo"
-          onClick={() => deteleTodo({ id })}
+          title="Remove task"
+          onClick={() => deteleTask({ id })}
         >
           <Trash aria-hidden size={18} />
         </button>
@@ -40,14 +41,14 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
         <Popover.Root onOpenChange={(e) => handleHideSecurityMessage(e)}>
           <Popover.Trigger
             title=""
-            aria-labelledby="Click here for remove todo"
+            aria-labelledby="Click here for remove task"
             className={styles.trashButton}
           >
             <Trash aria-hidden />
           </Popover.Trigger>{" "}
           <Popover.Portal>
             <Popover.Content
-              aria-describedby="Remove todo"
+              aria-describedby="Remove task"
               className={styles.trashButtonPopoverContentWrapper}
             >
               <Popover.Arrow
@@ -55,13 +56,13 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
                 className={styles.trashButtonPopoverArrow}
               />
               <div className={styles.trashButtonPopoverContent}>
-                <strong>Tem certeza que deseja excluir esse todo ?</strong>
+                <strong>Tem certeza que deseja excluir essa task ?</strong>
                 <Popover.Close
                   type="button"
-                  title="Remove todo"
-                  aria-label="Remove todo"
+                  title="Remove task"
+                  aria-label="Remove task"
                   className="button"
-                  onClick={() => deteleTodo({ id })}
+                  onClick={() => deteleTask({ id })}
                 >
                   Excluir
                 </Popover.Close>
@@ -86,4 +87,4 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
   );
 };
 
-export default ToDoTrashButton;
+export default TaskTrashButton;

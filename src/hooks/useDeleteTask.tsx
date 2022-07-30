@@ -2,41 +2,41 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useContext } from "react";
 import { PopUpContext } from "../contexts/PopUpContext";
 import { api } from "../lib/api";
-import { TodoRepositorie } from "../repositories/todoRepositorie";
+import { TaskRepositorie } from "../repositories/taskRepositorie";
 
 interface useDeleteResponse {
   message: string;
   id: string;
 }
 
-export const useDeleteTodo = () => {
+export const useDeleteTask = () => {
   const queryClient = useQueryClient();
   const { handleOpenPopUp } = useContext(PopUpContext);
 
   return useMutation(
     async (todo: { id: string }) => {
       const { data } = await api.post<useDeleteResponse>(
-        `/api/todo/delete`,
+        `/api/task/delete`,
         todo
       );
       return data;
     },
     {
       onSuccess: async (data) => {
-        const oldTodos = await queryClient.getQueryData<TodoRepositorie[]>([
-          "todos",
+        const oldTasks = await queryClient.getQueryData<TaskRepositorie[]>([
+          "tasks",
         ]);
 
-        const newTodos = oldTodos?.filter((todo) => {
-          return todo.id !== data.id;
+        const newTasks = oldTasks?.filter((task) => {
+          return task.id !== data.id;
         });
 
-        await queryClient.setQueryData(["todos"], newTodos);
+        await queryClient.setQueryData(["tasks"], newTasks);
       },
       onError: () =>
         handleOpenPopUp({
           type: "error",
-          message: "Não foi possível deletar o todo!",
+          message: "Não foi possível deletar a task!",
         }),
       retry: false,
     }

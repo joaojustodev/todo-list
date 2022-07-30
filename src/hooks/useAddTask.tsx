@@ -3,24 +3,24 @@ import { useContext } from "react";
 import { PopUpContext } from "../contexts/PopUpContext";
 import { api } from "../lib/api";
 
-export const useAddTodo = () => {
+export const useAddTask = () => {
   const queryClient = useQueryClient();
   const { handleOpenPopUp } = useContext(PopUpContext);
 
   return useMutation(
     async (newTodo: { name: string }) => {
-      const { data } = await api.post("/api/todo/add", newTodo);
+      const { data } = await api.post("/api/task/add", newTodo);
       return data;
     },
 
     {
       onSuccess: async () => {
-        await queryClient.invalidateQueries(["todos"]);
+        await queryClient.invalidateQueries(["tasks"]);
       },
       onError: () =>
         handleOpenPopUp({
           type: "error",
-          message: "Não foi possível criar o todo!",
+          message: "Não foi possível criar a task!",
         }),
       retry: false,
     }

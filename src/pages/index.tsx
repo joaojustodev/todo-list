@@ -2,8 +2,8 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useContext } from "react";
 import Header from "../components/Header";
-import AddTodo from "../components/Home/AddTodo";
-import TodoList from "../components/Home/TodoList";
+import AddTask from "../components/Home/AddTask";
+import TaskList from "../components/Home/TaskList";
 import Popup from "../components/Ui/PopUp";
 import { PopUpContext } from "../contexts/PopUpContext";
 
@@ -19,8 +19,8 @@ const Home: NextPage = () => {
       <Header />
       <main>
         <section>
-          <AddTodo />
-          <TodoList />
+          <AddTask />
+          <TaskList />
         </section>
       </main>
       {openPopUp && (

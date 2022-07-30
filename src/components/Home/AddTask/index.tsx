@@ -1,11 +1,11 @@
 import { FormEvent, useRef, useState } from "react";
-import { useAddTodo } from "../../../hooks/useAddTodo";
+import { useAddTask } from "../../../hooks/useAddTask";
 import { CircleNotch, Plus } from "phosphor-react";
-import styles from "./addtodo.module.scss";
+import styles from "./addtask.module.scss";
 
-const AddTodo = () => {
+const AddTask = () => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const { mutate, isLoading } = useAddTodo();
+  const { mutate, isLoading } = useAddTask();
   const [error, setError] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
@@ -26,23 +26,23 @@ const AddTodo = () => {
 
   return (
     <>
-      <div className={styles.addTodoBlock}>
+      <div className={styles.addtaskBlock}>
         <div className="containerLg">
           <form
-            className={styles.addtodoForm}
+            className={styles.addtaskForm}
             onSubmit={(e) => handleSubmit(e)}
           >
-            <div className={styles.addInputBlock}>
+            <div className={styles.addtaskInputBlock}>
               <input
-                className={`${styles.addtodoInput} ${
+                className={`${styles.addtaskInput} ${
                   error ? styles.addtodoInputWithError : ""
                 }`}
                 ref={inputRef}
                 type="text"
-                placeholder="Todo name"
+                placeholder="Add a task"
               />
               <button
-                className={styles.addtodoButton}
+                className={styles.addtaskButton}
                 type="submit"
                 title="Add todo"
                 disabled={isLoading}
@@ -66,4 +66,4 @@ const AddTodo = () => {
   );
 };
 
-export default AddTodo;
+export default AddTask;

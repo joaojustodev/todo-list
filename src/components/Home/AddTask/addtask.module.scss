@@ -2,11 +2,11 @@
 @import "../../../styles/core/mixins";
 @import "../../../styles/components/index";
 
-.addTodoBlock {
+.addtaskBlock {
   margin-bottom: $space-lg;
 }
 
-.addtodoForm {
+.addtaskForm {
   width: 100%;
   display: flex;
   align-items: center;
@@ -15,7 +15,7 @@
   padding: $space-sm;
 }
 
-.addInputBlock {
+.addtaskInputBlock {
   display: flex;
   width: 100%;
 
@@ -24,7 +24,7 @@
   }
 }
 
-.addtodoInput {
+.addtaskInput {
   width: 100%;
   height: 36px;
 
@@ -36,13 +36,13 @@
   transition: box-shadow 0.4s linear;
 }
 
-.addtodoInputWithError {
+.addtaskInputWithError {
   box-shadow: 1.5px 1.5px 6.66px 2.33px lighten($color: $error, $amount: 10);
   outline-color: lighten($color: $error, $amount: 10);
   border: 1px solid lighten($color: $error, $amount: 10);
 }
 
-.addtodoButton {
+.addtaskButton {
   width: 36px;
   height: 36px;
   border-radius: 0px;

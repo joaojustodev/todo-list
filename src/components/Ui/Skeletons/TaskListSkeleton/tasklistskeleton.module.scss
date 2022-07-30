@@ -1,7 +1,7 @@
 @import "../../../../styles/core/variants";
 @import "../../../../styles/core/mixins";
 
-.todolistSkeletonWrapper {
+.tasklistSkeletonWrapper {
   width: 100%;
   max-width: 640px;
 
@@ -18,7 +18,7 @@
   }
 }
 
-.todolistSkeleton {
+.tasklistSkeleton {
   width: 100%;
 
   @include bp1() {
@@ -26,7 +26,7 @@
   }
 }
 
-.todolistItemSkeleton {
+.tasklistItemSkeleton {
   width: 100%;
   height: 72px;
   color: $white;
