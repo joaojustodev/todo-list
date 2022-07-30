@@ -31,6 +31,29 @@
 - [ReactQuery](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/)
 - [Prisma](https://www.prisma.io/)
 
+
+## Install
+
+```
+$ git clone https://github.com/joaojustodev/todo-list
+
+$ cd todo-list
+
+```
+
+- Vá ate a pasta .env e adiciona a url do seu banco de dados mysql ou troque a variável DATABASE_URL para ler um arquivo sqlite local.
+
+- Caso trocar a variável para ler arquivo local, Vá até o arquivo 'prisma/schema.prisma' e troque provedor do Banco de dados para sqlite.
+
+
+```
+$ yarn install
+
+$ yarn dev
+
+```
+
+
 ## 🙋‍♂️ Author
 
 - **João Vitor** - [JoaoJustoDev](https://github.com/joaojustodev)
