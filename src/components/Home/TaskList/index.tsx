@@ -69,9 +69,12 @@ const TaskList = () => {
                   <div>
                     <div
                       style={{
-                        display: "flex",
+                        display: "grid",
+                        gridTemplateColumns: "22px 1fr",
+                        gridTemplateRows: "1fr",
+                        gap: "8px",
+
                         alignItems: "center",
-                        width: "100%",
                       }}
                     >
                       <input
@@ -90,7 +93,7 @@ const TaskList = () => {
                       <label
                         htmlFor={`task-${task.id}`}
                         className={`${styles.tasklistLabelName} ${
-                          task.finished ? styles.tasklistListItemNameDone : ""
+                          task.finished ? styles.tasklistLabelNameFinished : ""
                         }`}
                       >
                         {task.name}

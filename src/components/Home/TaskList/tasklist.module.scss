@@ -24,7 +24,7 @@
 .tasklistListItem {
   position: relative;
   width: 100%;
-  height: 52px;
+  min-height: 52px;
 
   padding: $space-sm;
 
@@ -64,10 +64,11 @@
 
 .tasklistLabelName {
   position: relative;
+  word-break: break-all;
   cursor: pointer;
 }
 
-.tasklistListItemNameDone::before {
+.tasklistLabelNameFinished::before {
   @include scratch;
   top: 10px;
   left: 0;
