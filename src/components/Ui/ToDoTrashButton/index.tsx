@@ -33,7 +33,6 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
           type="button"
           title="Remove todo"
           onClick={() => deteleTodo({ id })}
-          tabIndex={2}
         >
           <Trash aria-hidden size={18} />
         </button>
@@ -43,9 +42,8 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
             title=""
             aria-labelledby="Click here for remove todo"
             className={styles.trashButton}
-            tabIndex={2}
           >
-            <Trash aria-hidden size={22} />
+            <Trash aria-hidden />
           </Popover.Trigger>{" "}
           <Popover.Portal>
             <Popover.Content
@@ -63,7 +61,6 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
                   title="Remove todo"
                   aria-label="Remove todo"
                   className="button"
-                  tabIndex={1}
                   onClick={() => deteleTodo({ id })}
                 >
                   Excluir
@@ -74,7 +71,6 @@ const ToDoTrashButton = ({ id }: TodoTrashButtonProps) => {
                   <input
                     id="hideTrashMessage"
                     type="checkbox"
-                    tabIndex={2}
                     checked={checkboxValue}
                     aria-checked={checkboxValue}
                     onChange={() => setCheckBoxValue((old) => !old)}
