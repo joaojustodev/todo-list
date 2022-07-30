@@ -4,24 +4,25 @@ import { CircleNotch, Plus } from "phosphor-react";
 import styles from "./addtask.module.scss";
 
 const AddTask = () => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  // @ts-ignore
+  const inputRef = useRef<HTMLInputElement>({ value: "" });
   const { mutate, isLoading } = useAddTask();
   const [error, setError] = useState(false);
-
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    const element = inputRef.current;
+    const element = inputRef?.current;
 
-    const todo = element?.value as string;
+    const taskName = element.value as string;
 
-    if (!todo) {
+    if (taskName === "") {
       setError(true);
       return;
     }
-    setError(false);
 
-    mutate({ name: todo });
+    element.value = "";
+    setError(false);
+    mutate({ name: taskName });
   }
 
   return (
@@ -37,9 +38,11 @@ const AddTask = () => {
                 className={`${styles.addtaskInput} ${
                   error ? styles.addtodoInputWithError : ""
                 }`}
-                ref={inputRef}
                 type="text"
+                ref={inputRef}
                 placeholder="Add a task"
+                autoFocus
+                maxLength={60}
               />
               <button
                 className={styles.addtaskButton}
