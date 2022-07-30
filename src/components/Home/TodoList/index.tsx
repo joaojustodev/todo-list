@@ -1,25 +1,56 @@
 import { useTodos } from "../../../hooks/useTodos";
 import { useUpdateTodo } from "../../../hooks/useUpdateTodo";
-import styles from "./todolist.module.scss";
-import { Check } from "phosphor-react";
+import { formatDate } from "../../../utils/formatDate";
 import ToDoTrashButton from "../../Ui/ToDoTrashButton";
 import TodoListSkeleton from "../../Ui/Skeletons/TodoListSkeleton";
+import styles from "./todolist.module.scss";
+import { CaretDown } from "phosphor-react";
 
 const TodoList = () => {
   const { data, isLoading, isError } = useTodos();
   const { mutate: updateTodo } = useUpdateTodo();
 
-  function handleUpdateTodo(id: string) {
-    updateTodo({ id });
+  function handleUpdateTodo(id: string, checked: boolean) {
+    updateTodo({ id, finished: checked });
+  }
+
+  function handleExpandTodo(id: string) {
+    // PEGAR TODOS AS TASKS
+    const allTodos = document.querySelectorAll("li");
+
+    // PEGAR TASK SELICIONADO PARA EXPANDIR
+    const todo = document.getElementById(id);
+
+    // VERIFICAR SE EXISTE A CLASS PARA EXPANDIR EM ALGUM OUTRO
+    allTodos.forEach((value) => {
+      if (value !== todo) {
+        if (value.classList.contains(styles.todolistListItemExpand)) {
+          value.classList.remove(styles.todolistListItemExpand);
+          value
+            .querySelector("#expand-task")
+            ?.setAttribute("aria-expanded", "false");
+        }
+      }
+    });
+
+    // VERIFICAR SE NO TODO SELECIONADO JA ESTA EXPANDIDO
+    if (todo?.classList.contains(styles.todolistListItemExpand)) {
+      todo.classList.remove(styles.todolistListItemExpand);
+      todo
+        .querySelector("#expand-task")
+        ?.setAttribute("aria-expanded", "false");
+      return;
+    }
+
+    // EXPANDIR TODO
+    todo?.classList.add(styles.todolistListItemExpand);
+    todo?.querySelector("#expand-task")?.setAttribute("aria-expanded", "true");
   }
 
   if (!data && isLoading) {
     return <TodoListSkeleton />;
   }
 
-  {
-    /** NOTE: MELHORAR ACESSIBILIDADE AQUI */
-  }
   return (
     <div>
       <div className="containerLg flexCenter">
@@ -31,29 +62,57 @@ const TodoList = () => {
               {data.map((todo) => (
                 <li
                   key={todo.id}
-                  tabIndex={1}
-                  className={styles.todolistListItem}
+                  id={todo.id}
+                  className={`${styles.todolistListItem}`}
                 >
-                  <div
-                    style={{ display: "flex", width: "100%" }}
-                    onClick={() => handleUpdateTodo(todo.id)}
-                  >
-                    <span
-                      className={`${styles.todolistCheckWrapper} ${
-                        todo.isDone ? styles.todolistCheckDoneWrapper : ""
-                      }`}
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%",
+                      }}
                     >
-                      {todo.isDone ? <Check size={16} /> : ""}
-                    </span>
-                    <span
-                      className={`${styles.todolistListItemName} ${
-                        todo.isDone ? styles.todolistListItemNameDone : ""
-                      }`}
-                    >
-                      {todo.name}
-                    </span>
+                      <input
+                        type="checkbox"
+                        name={todo.slug}
+                        id={`task-${todo.id}`}
+                        aria-label="Click me for finish task"
+                        aria-checked={todo.isDone}
+                        defaultChecked={todo.isDone}
+                        onChange={(e) =>
+                          handleUpdateTodo(todo.id, e.target.checked)
+                        }
+                        className={styles.todolistCheckBox}
+                      />
+
+                      <label
+                        htmlFor={`task-${todo.id}`}
+                        className={`${styles.todolistLabelName} ${
+                          todo.isDone ? styles.todolistListItemNameDone : ""
+                        }`}
+                      >
+                        {todo.name}
+                      </label>
+                    </div>
+                    <div style={{ display: "flex" }}>
+                      <ToDoTrashButton id={todo.id} />
+                      <button
+                        type="button"
+                        id={`expand-task`}
+                        title="Expand task"
+                        aria-expanded="false"
+                        aria-label="Expand todo for more informations"
+                        onClick={() => handleExpandTodo(todo.id)}
+                        className={styles.todolistExpandButton}
+                      >
+                        <CaretDown aria-hidden size={22} />
+                      </button>
+                    </div>
                   </div>
-                  <ToDoTrashButton id={todo.id} />
+                  <div className={`${styles.todolistItemDetails}`}>
+                    <span>Created At: {formatDate(todo.createdAt)}</span>
+                  </div>
                 </li>
               ))}
             </ul>
