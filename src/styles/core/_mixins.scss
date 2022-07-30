@@ -110,3 +110,25 @@
     }
   }
 }
+
+@mixin fadeIn($duration, $delay: false) {
+  @if $delay == false {
+    $delay: 0s;
+  }
+
+  animation-name: fadeIn;
+  animation-duration: $duration;
+  animation-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-fill-mode: forwards;
+  animation-delay: $delay;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+}
