@@ -1,38 +1,50 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { useContext } from "react";
-import Header from "../components/Header";
-import AddTask from "../components/Home/AddTask";
-import TaskList from "../components/Home/TaskList";
-import Popup from "../components/Ui/PopUp";
-import { PopUpContext } from "../contexts/PopUpContext";
+import { GetServerSideProps } from "next";
+import { signIn, useSession } from "next-auth/react";
+import { unstable_getServerSession } from "next-auth/next";
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
 
-const Home: NextPage = () => {
-  const { openPopUp, setOpenPopUp, rolePopUp } = useContext(PopUpContext);
+const Home = () => {
+  const { data, status } = useSession({
+    required: true,
+    onUnauthenticated: () => alert("Voce não foi autorizado"),
+  });
+  console.log("DATA:", data);
+  console.log("STATUS:", status);
+
   return (
-    <>
-      <Head>
-        <title>TodoList - joaojustodev</title>
-        <meta name="description" content="Todo list with NextJS" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <Header />
-      <main>
-        <section>
-          <AddTask />
-          <TaskList />
-        </section>
-      </main>
-      {openPopUp && (
-        <Popup
-          state={openPopUp}
-          setState={setOpenPopUp}
-          type={rolePopUp.type}
-          message={rolePopUp.message}
-        />
-      )}
-    </>
+    <main
+      style={{
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div>
+        <button type="button" onClick={() => signIn("github")}>
+          Fazer Login com github
+        </button>
+      </div>
+    </main>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      props: {},
+    };
+  }
+
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/tasks",
+    },
+  };
 };
 
 export default Home;
