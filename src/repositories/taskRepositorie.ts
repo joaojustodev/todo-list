@@ -5,4 +5,5 @@ export interface TaskRepositorie {
   finished: boolean;
   finishedAt: Date;
   createdAt: Date;
+  userId: string;
 }
