@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
 import nookies from "nookies";
+import { prisma } from "../../../lib/prisma";
+import { SESSION_TOKEN_COOKIE } from "./../../../constants";
 
 interface DeleteTaskHandler {
   id: string;
 }
-
-const SESSION_TOKEN_COOKIE = "next-auth.session-token";
 
 async function deleteTaskHandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {

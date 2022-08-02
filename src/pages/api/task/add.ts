@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import nookies from "nookies";
 import { prisma } from "../../../lib/prisma";
 import { TaskRepositorie } from "../../../repositories/taskRepositorie";
-import nookies from "nookies";
-
-const SESSION_TOKEN_COOKIE = "next-auth.session-token";
+import { SESSION_TOKEN_COOKIE } from "./../../../constants";
 
 async function addTaskHandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {

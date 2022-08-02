@@ -1,8 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { prisma } from "../../../lib/prisma";
 import nookies from "nookies";
-
-const SESSION_TOKEN_COOKIE = "next-auth.session-token";
+import { prisma } from "../../../lib/prisma";
+import { SESSION_TOKEN_COOKIE } from "./../../../constants";
 
 async function listTasksHandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
