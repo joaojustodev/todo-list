@@ -15,8 +15,6 @@ const Avatar = ({ src }: AvatarProps) => {
         width={32}
         height={32}
         quality={100}
-        placeholder="blur"
-        blurDataURL={src}
         onClick={() => signOut()}
       />
     </div>
