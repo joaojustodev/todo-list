@@ -27,9 +27,7 @@ export const nextAuthOptions: NextAuthOptions = {
 
     async jwt({ token, account }) {
       console.log("cai no jwt");
-      // Persist the OAuth access_token to the token right after signin
       console.log(`token: ${token}`);
-
       console.log("account:", account);
 
       if (account) {
@@ -38,7 +36,6 @@ export const nextAuthOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      console.log("token:", token);
       // Send properties to the client, like an access_token from a provider.
       // session.accessToken = token.accessToken as string;
       return session;

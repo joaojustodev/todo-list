@@ -1,5 +1,8 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { prisma } from "../../../lib/prisma";
+import nookies from "nookies";
+
+const SESSION_TOKEN_COOKIE = "next-auth.session-token";
 
 async function listTasksHandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") {
@@ -7,9 +10,26 @@ async function listTasksHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
+  const sessionToken = nookies.get({ req })[SESSION_TOKEN_COOKIE];
+
+  const verifySessionToken = await prisma.session.findUniqueOrThrow({
+    where: {
+      sessionToken,
+    },
+  });
+
+  if (!verifySessionToken) {
+    res.status(404).json({ message: "SESSION NOT FOUND" });
+  }
+
+  const userId = verifySessionToken.userId;
+
   const tasks = await prisma.task.findMany({
     orderBy: {
       createdAt: "asc",
+    },
+    where: {
+      userId,
     },
   });
 
