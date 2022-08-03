@@ -22,8 +22,8 @@ export const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/",
-    error: "/",
+    signIn: "/?loggedin=true",
+    error: "/?callbackError=true",
     signOut: "/?logout=true",
   },
   events: {
@@ -99,6 +99,7 @@ export const nextAuthOptions: NextAuthOptions = {
       },
     },
   },
+  debug: true,
   logger: {
     error(code, metadata) {
       console.error(code, metadata);
