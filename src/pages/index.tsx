@@ -1,6 +1,5 @@
 import { GetServerSideProps } from "next";
-import { unstable_getServerSession } from "next-auth/next";
-import { nextAuthOptions } from "./api/auth/[...nextauth]";
+import { getSession } from "next-auth/react";
 import Login from "../components/Login";
 
 const Home = () => {
@@ -11,8 +10,8 @@ const Home = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
-  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
 
   if (!session) {
     return {
