@@ -22,13 +22,14 @@ export const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin",
+    signIn: "/",
   },
   callbacks: {
-    async signIn({ user, account }) {
+    async signIn({ user, account, profile }) {
       console.log("SIGN IN:");
       console.log("USER:", user);
       console.log("ACCOUNT:", account);
+      console.log("PROFILE:", profile);
 
       return true;
     },
