@@ -23,6 +23,23 @@ export const nextAuthOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: "/",
+    error: "/",
+    signOut: "/",
+  },
+  events: {
+    async linkAccount(message) {
+      console.log("EVENT LINK ACCOUNT");
+      console.log(message);
+    },
+    async signIn(message) {
+      console.log("EVENT SIGNIN");
+      console.log(message);
+    },
+
+    async session(message) {
+      console.log("EVENT SESSION");
+      console.log(message);
+    },
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -51,6 +68,46 @@ export const nextAuthOptions: NextAuthOptions = {
       // Send properties to the client, like an access_token from a provider.
       // session.accessToken = token.accessToken as string;
       return session;
+    },
+  },
+
+  cookies: {
+    sessionToken: {
+      name: `__Secure-next-auth.session-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+    callbackUrl: {
+      name: `__Secure-next-auth.callback-url`,
+      options: {
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+    csrfToken: {
+      name: `__Host-next-auth.csrf-token`,
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: true,
+      },
+    },
+  },
+  logger: {
+    error(code, metadata) {
+      console.error(code, metadata);
+    },
+    warn(code) {
+      console.warn(code);
+    },
+    debug(code, metadata) {
+      console.debug(code, metadata);
     },
   },
 };
