@@ -24,7 +24,7 @@ export const nextAuthOptions: NextAuthOptions = {
   pages: {
     signIn: "/",
     error: "/",
-    signOut: "/",
+    signOut: "/?logout=true",
   },
   events: {
     async linkAccount(message) {
