@@ -3,7 +3,7 @@ import { useDeleteTask } from "../../../hooks/useDeleteTask";
 import useLocalStorage from "../../../hooks/useLocalStorage";
 import styles from "./tasktrashbutton.module.scss";
 import { Trash } from "phosphor-react";
-import { useState } from "react";
+import { useEffect, useRef } from "react";
 
 interface TaskTrashButtonProps {
   id: string;
@@ -15,15 +15,23 @@ const TaskTrashButton = ({ id }: TaskTrashButtonProps) => {
     "hide-trash-security-message",
     false
   );
-  const [checkboxValue, setCheckBoxValue] = useState<boolean>();
+  const checkboxRef = useRef<HTMLInputElement>(null);
 
-  function handleHideSecurityMessage(e: Boolean) {
-    if (!e) {
-      if (checkboxValue) {
+  // NOTE: TODA VEZ QUE O POP-UP FECHA ATIVA ESSA FUNÇÃO
+  function handleHideSecurityMessage(popupEvent: Boolean) {
+    const checkboxElement = checkboxRef.current;
+    // AO FEHCAR O POP-UP ELE VERIFICA SE O CHECK BOX FOI MARCADO PARA ALTERAR ESTA NO LOCAL STORAGE
+    if (!popupEvent) {
+      if (checkboxElement?.checked) {
         setHideSecurityMessage(!hideSecurityMessageStorage);
       }
     }
   }
+
+  useEffect(() => {
+    console.log(hideSecurityMessageStorage);
+  }, [hideSecurityMessageStorage]);
+
   //NOTE: VERIFICAR ACESSIBILIDADE AQUI
 
   return (
@@ -38,7 +46,9 @@ const TaskTrashButton = ({ id }: TaskTrashButtonProps) => {
           <Trash aria-hidden size={18} />
         </button>
       ) : (
-        <Popover.Root onOpenChange={(e) => handleHideSecurityMessage(e)}>
+        <Popover.Root
+          onOpenChange={(popupEvent) => handleHideSecurityMessage(popupEvent)}
+        >
           <Popover.Trigger
             title=""
             aria-labelledby="Click here for remove task"
@@ -72,9 +82,8 @@ const TaskTrashButton = ({ id }: TaskTrashButtonProps) => {
                   <input
                     id="hideTrashMessage"
                     type="checkbox"
-                    checked={checkboxValue}
-                    aria-checked={checkboxValue}
-                    onChange={() => setCheckBoxValue((old) => !old)}
+                    ref={checkboxRef}
+                    aria-checked={hideSecurityMessageStorage}
                   />{" "}
                   Não aparecer mais essa mensagem.
                 </label>

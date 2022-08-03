@@ -1,38 +1,31 @@
-import type { NextPage } from "next";
-import Head from "next/head";
-import { useContext } from "react";
-import Header from "../components/Header";
-import AddTask from "../components/Home/AddTask";
-import TaskList from "../components/Home/TaskList";
-import Popup from "../components/Ui/PopUp";
-import { PopUpContext } from "../contexts/PopUpContext";
+import { GetServerSideProps } from "next";
+import { unstable_getServerSession } from "next-auth/next";
+import { nextAuthOptions } from "./api/auth/[...nextauth]";
+import Login from "../components/Login";
 
-const Home: NextPage = () => {
-  const { openPopUp, setOpenPopUp, rolePopUp } = useContext(PopUpContext);
+const Home = () => {
   return (
-    <>
-      <Head>
-        <title>TodoList - joaojustodev</title>
-        <meta name="description" content="Todo list with NextJS" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Head>
-      <Header />
-      <main>
-        <section>
-          <AddTask />
-          <TaskList />
-        </section>
-      </main>
-      {openPopUp && (
-        <Popup
-          state={openPopUp}
-          setState={setOpenPopUp}
-          type={rolePopUp.type}
-          message={rolePopUp.message}
-        />
-      )}
-    </>
+    <main>
+      <Login />
+    </main>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+  const session = await unstable_getServerSession(req, res, nextAuthOptions);
+
+  if (!session) {
+    return {
+      props: {},
+    };
+  }
+
+  return {
+    redirect: {
+      permanent: false,
+      destination: "/tasks",
+    },
+  };
 };
 
 export default Home;
