@@ -8,11 +8,11 @@ import { PopUpContextProvider } from "../contexts/PopUpContext";
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <PopUpContextProvider>
-        <QueryClientProvider client={query}>
+      <QueryClientProvider client={query}>
+        <PopUpContextProvider>
           <Component {...pageProps} />
-        </QueryClientProvider>
-      </PopUpContextProvider>
+        </PopUpContextProvider>
+      </QueryClientProvider>
     </SessionProvider>
   );
 }
