@@ -30,8 +30,7 @@ const Login = () => {
             <button
               type="button"
               title="Connect with facebook account"
-              disabled
-              aria-disabled
+              onClick={() => signIn("facebook")}
               className={styles.loginSocialFacebook}
             >
               <FacebookLogo />
