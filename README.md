@@ -25,6 +25,8 @@
 
 - Para autenticação foi usada a lib next-auth usando os provedores do github, facebook e google para o usuário de conectar e poder ter acesso a rota **/tasks**.
 
+- Como banco de dados estou usando MySQL no planet scale.
+
 ## 🧰 Tools
 
 - [React](https://reactjs.org/)
@@ -33,6 +35,7 @@
 - [ReactQuery](https://tanstack.com/query/v4/?from=reactQueryV3&original=https://react-query-v3.tanstack.com/)
 - [Prisma](https://www.prisma.io/)
 - [Next-auth](https://next-auth.js.org/)
+- [PlanetScale](https://planetscale.com/)
 
 ## Install
 
@@ -56,7 +59,7 @@ $ yarn install
     - GITHUB_SECRET=
 ```
 
-    **FACEBOOK PROVIDER DONT RUN IN LOCALHOST**
+    **FACEBOOK and GOOGLE PROVIDER DONT RUN IN LOCALHOST**
 
 ## 🙋‍♂️ Author
 
