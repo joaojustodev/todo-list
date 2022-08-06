@@ -3,11 +3,13 @@
 
 .popUpViewPort {
   position: fixed;
-  bottom: 20px;
+  top: 20px;
   right: 0;
-  width: 200px;
+  z-index: 200;
 
-  @include bp1() {
+  width: 100%;
+
+  @include customMinBp(280px) {
     width: 280px;
   }
 }
