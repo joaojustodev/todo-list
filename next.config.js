@@ -4,7 +4,11 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["avatars.githubusercontent.com", "platform-lookaside.fbsbx.com"],
+    domains: [
+      "avatars.githubusercontent.com",
+      "platform-lookaside.fbsbx.com",
+      "lh3.googleusercontent.com",
+    ],
   },
 };
 
