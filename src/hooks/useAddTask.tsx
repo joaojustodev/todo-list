@@ -5,7 +5,7 @@ import { api } from "../lib/api";
 
 export const useAddTask = () => {
   const queryClient = useQueryClient();
-  const { handleOpenPopUp } = useContext(PopUpContext);
+  const { openPopUp } = useContext(PopUpContext);
 
   return useMutation(
     async (newTodo: { name: string }) => {
@@ -17,11 +17,10 @@ export const useAddTask = () => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["tasks"]);
       },
-      onError: () =>
-        handleOpenPopUp({
-          type: "error",
-          message: "Não foi possível criar a task!",
-        }),
+      onError: () => {
+        openPopUp && openPopUp("error", "Cannot possible add the task!");
+      },
+
       retry: false,
     }
   );

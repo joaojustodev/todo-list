@@ -5,7 +5,7 @@ import { api } from "../lib/api";
 
 export const useUpdateTask = () => {
   const queryClient = useQueryClient();
-  const { handleOpenPopUp } = useContext(PopUpContext);
+  const { openPopUp } = useContext(PopUpContext);
 
   return useMutation(
     async (task: { id: string; finished: boolean }) => {
@@ -16,11 +16,7 @@ export const useUpdateTask = () => {
       onSuccess: async () => {
         await queryClient.invalidateQueries(["tasks"]);
       },
-      onError: () =>
-        handleOpenPopUp({
-          type: "error",
-          message: "Não foi possível atualizar a task!",
-        }),
+      onError: () => openPopUp && openPopUp("error", "Cannot finish the task"),
       retry: false,
     }
   );
