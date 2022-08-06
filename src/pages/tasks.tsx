@@ -1,4 +1,3 @@
-import Head from "next/head";
 import type { GetServerSideProps } from "next";
 import { getSession } from "next-auth/react";
 import type { Session } from "next-auth";
@@ -11,7 +10,10 @@ interface TasksProps {
   session: Session;
 }
 
-const Tasks = ({ session }: TasksProps) => {
+const Tasks = ({ session, ...props }: TasksProps) => {
+  console.log("session:" + session);
+  console.log("props:" + props);
+
   return (
     <>
       <Header session={session} />
