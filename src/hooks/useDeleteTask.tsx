@@ -11,7 +11,7 @@ interface useDeleteResponse {
 
 export const useDeleteTask = () => {
   const queryClient = useQueryClient();
-  const { handleOpenPopUp } = useContext(PopUpContext);
+  const { openPopUp } = useContext(PopUpContext);
 
   return useMutation(
     async (todo: { id: string }) => {
@@ -33,11 +33,7 @@ export const useDeleteTask = () => {
 
         await queryClient.setQueryData(["tasks"], newTasks);
       },
-      onError: () =>
-        handleOpenPopUp({
-          type: "error",
-          message: "Não foi possível deletar a task!",
-        }),
+      onError: () => openPopUp && openPopUp("error", "Cannot delete the task!"),
       retry: false,
     }
   );

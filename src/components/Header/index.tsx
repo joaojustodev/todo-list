@@ -14,7 +14,7 @@ const Header = ({ session }: HeaderProps) => {
         <nav className={styles.headerNav}>
           <Logo size={28} />
 
-          <Avatar src={session.user?.image as string} />
+          <Avatar src={(session.user?.image as string) ?? ""} />
         </nav>
       </div>
     </header>

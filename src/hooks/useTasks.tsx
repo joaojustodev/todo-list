@@ -5,7 +5,7 @@ import { api } from "../lib/api";
 import { TaskRepositorie } from "../repositories/taskRepositorie";
 
 export const useTasks = () => {
-  const { handleOpenPopUp } = useContext(PopUpContext);
+  const { openPopUp } = useContext(PopUpContext);
   return useQuery(
     ["tasks"],
     async () => {
@@ -15,10 +15,7 @@ export const useTasks = () => {
     },
     {
       onError: () =>
-        handleOpenPopUp({
-          type: "error",
-          message: "Não foi possível busca suas tasks!",
-        }),
+        openPopUp && openPopUp("error", "Cannot possible fetch your tasks!"),
       refetchOnWindowFocus: false,
       retry: false,
     }
