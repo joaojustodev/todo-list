@@ -39,9 +39,8 @@ const Login = () => {
             <button
               type="button"
               title="Connect with google account"
-              disabled
-              aria-disabled
               className={styles.loginSocialGoogle}
+              onClick={() => signIn("google")}
             >
               <GoogleLogo />
               Google
