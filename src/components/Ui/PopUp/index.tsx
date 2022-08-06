@@ -8,7 +8,7 @@ const PopUpRoot = () => {
   return (
     <Popup
       state={displayPopUp}
-      setState={closePopUp}
+      setState={closePopUp as () => void}
       view={setPopUpView as POPUP_VIEW}
       message={setPopUpMessage}
     />
