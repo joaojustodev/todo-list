@@ -3,14 +3,14 @@ import type { AppProps } from "next/app";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { SessionProvider } from "next-auth/react";
 import { query } from "../lib/query";
-import { PopUpContextProvider } from "../contexts/PopUpContext";
+import { PopUpProvider } from "../contexts/PopUpContext";
 import Head from "next/head";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <QueryClientProvider client={query}>
-        <PopUpContextProvider>
+        <PopUpProvider>
           <Head>
             <title>TodoList - joaojustodev</title>
             <meta name="description" content="Todo list with NextJS" />
@@ -38,7 +38,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             <link rel="manifest" href="/site.webmanifest" />
           </Head>
           <Component {...pageProps} />
-        </PopUpContextProvider>
+        </PopUpProvider>
       </QueryClientProvider>
     </SessionProvider>
   );

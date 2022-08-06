@@ -1,31 +1,18 @@
-import { Dispatch, SetStateAction } from "react";
-import * as Toast from "@radix-ui/react-toast";
-import PopUpError from "./PopUpError";
-import PopUpSuccess from "./PopUpSuccess";
+import { useContext } from "react";
+import { PopUpContext, POPUP_VIEW } from "../../../contexts/PopUpContext";
+import Popup from "./PopUp";
 
-import styles from "./popup.module.scss";
-import { PopUpRoleProps } from "../../../contexts/PopUpContext";
-
-interface PopUpProps extends PopUpRoleProps {
-  state: boolean;
-  setState: Dispatch<SetStateAction<boolean>>;
-}
-
-const Popup = ({ setState, state, type, message }: PopUpProps) => {
+const PopUpRoot = () => {
+  const { displayPopUp, closePopUp, setPopUpMessage, setPopUpView } =
+    useContext(PopUpContext);
   return (
-    <Toast.Provider>
-      <Toast.Viewport className={styles.popUpViewPort}>
-        <Toast.Root
-          open={state}
-          onOpenChange={setState}
-          className={styles.popUpRoot}
-        >
-          {type === "error" && <PopUpError message={message} />}
-          {type === "success" && <PopUpSuccess message={message} />}
-        </Toast.Root>
-      </Toast.Viewport>
-    </Toast.Provider>
+    <Popup
+      state={displayPopUp}
+      setState={closePopUp}
+      view={setPopUpView as POPUP_VIEW}
+      message={setPopUpMessage}
+    />
   );
 };
 
-export default Popup;
+export default PopUpRoot;
