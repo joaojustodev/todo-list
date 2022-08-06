@@ -27,9 +27,9 @@ export const nextAuthOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: "/?loggedin=true",
-    error: "/?callbackError=true",
-    signOut: "/?logout=true",
+    signIn: "/",
+    error: "/",
+    signOut: "/",
   },
   events: {
     async linkAccount(message) {
