@@ -23,7 +23,7 @@
 
 - Para fazer chamadas a api utilizei React Query, que nunca tinha atualizado, mas para esse projeto achei perfeito pela sua simplicidade e poder de manipulação de dados assíncrono.
 
-- Para autenticação foi usada a lib next-auth usando os provedores do github e facebook para o usuário de conectar e poder ter acesso a rota **/tasks**.
+- Para autenticação foi usada a lib next-auth usando os provedores do github, facebook e google para o usuário de conectar e poder ter acesso a rota **/tasks**.
 
 ## 🧰 Tools
 
