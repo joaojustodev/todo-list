@@ -10,10 +10,7 @@ interface TasksProps {
   session: Session;
 }
 
-const Tasks = ({ session, ...props }: TasksProps) => {
-  console.log("session:" + session);
-  console.log("props:" + props);
-
+const Tasks = ({ session }: TasksProps) => {
   return (
     <>
       <Header session={session} />

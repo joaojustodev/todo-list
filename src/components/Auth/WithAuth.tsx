@@ -14,7 +14,7 @@ function WithAuth(NextComponent: ElementType) {
       }
     }, [data, replace]);
 
-    return <NextComponent {...props} session={data} />;
+    return data && <NextComponent {...props} session={data} />;
   };
 
   return Wrapper;
