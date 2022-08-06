@@ -53,7 +53,7 @@ $ yarn install
 ```
   .env
     - DATABASE_URL=mysql://...
-    - NEXTAUTH_URL=http://localhost:300
+    - NEXTAUTH_URL=http://localhost:3000
     - NEXTAUTH_SECRET=SECRET
     - GITHUB_ID=
     - GITHUB_SECRET=
