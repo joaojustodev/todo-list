@@ -8,7 +8,7 @@ export const useUpdateTask = () => {
   const { openPopUp } = useContext(PopUpContext);
 
   return useMutation(
-    async (task: { id: string; finished: boolean }) => {
+    async (task: { id: string; isFinished: boolean }) => {
       const { data } = await api.post(`/api/task/update`, task);
       return data;
     },

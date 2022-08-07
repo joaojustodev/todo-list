@@ -1,8 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import nookies from "nookies";
-import { prisma } from "../../../lib/prisma";
-import { TaskRepositorie } from "../../../repositories/taskRepositorie";
-import { SESSION_TOKEN_COOKIE } from "./../../../constants";
+import { AuthSessionService } from "../../../services/auth/AuthSessionService";
+import { AddTaskService } from "../../../services/task/AddTaskService";
 
 async function addTaskHandler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
@@ -10,45 +8,19 @@ async function addTaskHandler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const task = req.body as TaskRepositorie;
+  try {
+    const session = await AuthSessionService.execute(req);
 
-  if (!task.name) {
-    res.status(400).json({ error: "Name is required" });
-    return;
+    if (!session) {
+      throw new Error("SESSION NOT DEFINED");
+    }
+
+    const add = await AddTaskService.execute(req, session.userId);
+
+    res.status(201).json(add);
+  } catch (error) {
+    if (error) throw new Error("");
   }
-
-  const sessionToken = nookies.get({ req })[SESSION_TOKEN_COOKIE];
-
-  const verifySessionToken = await prisma.session.findUniqueOrThrow({
-    where: {
-      sessionToken,
-    },
-  });
-
-  if (!verifySessionToken) {
-    res.status(404).json({ message: "SESSION NOT FOUND" });
-  }
-
-  const tasks = await prisma.task.count({
-    where: { userId: verifySessionToken.userId },
-  });
-
-  if (tasks >= 10) {
-    res.status(406).json({ error: "Maximun tasks: 10!" });
-    return;
-  }
-
-  const slug = task.name.trim().replaceAll("&", "-and-").replaceAll(" ", "-");
-
-  const data = {
-    name: task.name,
-    slug,
-    userId: verifySessionToken.userId,
-  };
-
-  const add = await prisma.task.create({ data });
-
-  res.status(201).json(add);
 }
 
 export default addTaskHandler;

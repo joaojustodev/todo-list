@@ -11,7 +11,7 @@ const TaskList = () => {
   const { mutate: updateTask } = useUpdateTask();
 
   function handleUpdateTask(id: string, checked: boolean) {
-    updateTask({ id, finished: checked });
+    updateTask({ id, isFinished: checked });
   }
 
   function handleExpandTask(id: string) {
