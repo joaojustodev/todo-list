@@ -1,0 +1,22 @@
+{
+  "name": "Todo-list joaojustodev",
+  "short_name": "Todo-list joaojustodev",
+  "description": "Todo-list joaojustodev - get organized",
+  "display": "standalone",
+  "start_url": "/",
+  "theme_color": "#fff",
+  "background_color": "#3e63dd",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

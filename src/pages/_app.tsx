@@ -35,6 +35,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
               sizes="16x16"
               href="/favicon-16x16.png"
             />
+
+            <link rel="icon" href="/favicon.ico" type="image/x-icon" />
             <link rel="manifest" href="/site.webmanifest" />
           </Head>
           <Component {...pageProps} />
